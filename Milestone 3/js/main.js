@@ -168,11 +168,32 @@ createApp({
       ],
 
       activeContact: null,
+      newMessage: "",
     };
   },
   methods: {
     selectContact(index) {
       this.activeContact = index;
+    },
+
+    sendMessage() {
+      if (this.activeContact !== null && this.newMessage.trim() !== "") {
+        this.contacts[this.activeContact].messages.push({
+          date: new Date().toLocaleString(),
+          message: this.newMessage.trim(),
+          status: "sent",
+        });
+        this.newMessage = "";
+      }
+
+      setTimeout(() => {
+        this.newMessage = "Ok";
+        this.contacts[this.activeContact].messages.push({
+          date: new Date().toLocaleString(),
+          message: this.newMessage.trim(),
+          status: "received",
+        });
+      }, 1000);
     },
   },
 }).mount("#app");

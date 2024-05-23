@@ -48,7 +48,10 @@
         </div>
         <div class="chats">
           <ul>
-            <li v-for="(contact, index) in contacts">
+            <li
+              v-for="(contact, index) in contacts"
+              @click="selectContact(index)"
+            >
               <div class="chats-row">
                 <div class="chats-pic">
                   <img
@@ -87,34 +90,18 @@
           </div>
         </header>
         <div class="conversation">
-          <div class="message user">
-            <div class="green">
-              <div class="text">
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos
-                  dolore quasi harum tempora animi officiis aperiam mollitia sit
-                  dolores ducimus! Numquam asperiores deserunt labore laboriosam
-                  earum architecto natus libero pariatur.
-                </p>
-              </div>
-              <div class="arrow">
-                <i class="fas fa-angle-down"></i>
-              </div>
+          <div
+            v-if="activeContact !== null"
+            class="message"
+            v-for="(contact, index) in contacts[activeContact].messages"
+            :key="index"
+            :class="contact.status"
+          >
+            <div class="text">
+              <p>{{contact.message}}</p>
             </div>
-          </div>
-          <div class="message">
-            <div class="white">
-              <div class="text">
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos
-                  dolore quasi harum tempora animi officiis aperiam mollitia sit
-                  dolores ducimus! Numquam asperiores deserunt labore laboriosam
-                  earum architecto natus libero pariatur.
-                </p>
-              </div>
-              <div class="arrow">
-                <i class="fas fa-angle-down"></i>
-              </div>
+            <div class="arrow">
+              <i class="fas fa-angle-down"></i>
             </div>
           </div>
         </div>

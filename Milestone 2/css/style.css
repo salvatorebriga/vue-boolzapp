@@ -84,31 +84,37 @@ header {
   overflow: hidden;
   overflow-y: auto;
   background-image: url("../img/mine.jpg");
+  padding: 50px;
 }
 
-.conversation .message {
+.message {
   padding: 20px;
-}
-
-.user {
+  width: 20%;
+  border-radius: 5px;
   display: flex;
-  justify-content: right;
+  margin-bottom: 20px;
 }
 
-.conversation .message .green {
-  width: 80%;
+.sent {
+  display: flex;
+  margin-left: auto;
   background-color: #d4f9bb;
-  border-radius: 5px;
-  padding: 10px;
-  display: flex;
+  text-align: right;
 }
 
-.conversation .message .white {
-  width: 80%;
-  background-color: white;
-  border-radius: 5px;
-  padding: 10px;
+.received {
   display: flex;
+  background-color: white;
+  text-align: left;
+}
+
+.arrow {
+  margin-left: auto;
+}
+
+.text {
+  flex-grow: 1;
+  margin-right: 50px;
 }
 
 .input-area {

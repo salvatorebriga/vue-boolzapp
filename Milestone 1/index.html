@@ -17,7 +17,7 @@
     <title>WhatsApp</title>
   </head>
   <body>
-    <div class="app">
+    <div id="app">
       <div class="sidebar">
         <header>
           <div>
@@ -48,17 +48,23 @@
         </div>
         <div class="chats">
           <ul>
-            <li>
+            <li v-for="(contact, index) in contacts">
               <div class="chats-row">
                 <div class="chats-pic">
-                  <img src="img/avatar_1.jpg" class="avatar" alt="" />
+                  <img
+                    :src="contact.avatar"
+                    class="avatar"
+                    :alt="contact.avatar"
+                  />
                 </div>
                 <div class="chats-text">
-                  <h4>Vergil</h4>
-                  <p>Lorem ipsum dolor sit amet</p>
+                  <h4>{{contact.name}}</h4>
+                  <p>
+                    {{contact.messages[contact.messages.length - 1].message}}
+                  </p>
                 </div>
                 <div class="chats-date">
-                  <p>16:24</p>
+                  <p></p>
                 </div>
               </div>
             </li>

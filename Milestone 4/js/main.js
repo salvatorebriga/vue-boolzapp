@@ -187,10 +187,10 @@ createApp({
       }
 
       setTimeout(() => {
-        this.newMessage = "Ok";
+        receive = "Ok";
         this.contacts[this.activeContact].messages.push({
           date: new Date().toLocaleString(),
-          message: this.newMessage.trim(),
+          message: receive.trim(),
           status: "received",
         });
       }, 1000);

@@ -43,14 +43,19 @@
             <div>
               <span class="fas fa-magnifying-glass"></span>
             </div>
-            <input type="text" placeholder="Cerca o inizia una nuova chat" />
+            <input
+              type="text"
+              v-model="searchQuery"
+              placeholder="Cerca o inizia una nuova chat"
+            />
           </div>
         </div>
         <div class="chats">
           <ul>
             <li
-              v-for="(contact, index) in contacts"
+              v-for="(contact, index) in filteredChats"
               @click="selectContact(index)"
+              v-show="contact.visible"
             >
               <div class="chats-row">
                 <div class="chats-pic">
@@ -67,7 +72,7 @@
                   </p>
                 </div>
                 <div class="chats-date">
-                  <p></p>
+                  <p>{{contact.messages[contact.messages.length - 1].date}}</p>
                 </div>
               </div>
             </li>
@@ -77,11 +82,17 @@
       <div class="content">
         <header>
           <div>
-            <img src="img/avatar_2.jpg" class="avatar" alt="" />
+            <img
+              :src="contacts[activeContact].avatar"
+              class="avatar"
+              :alt="contacts[activeContact].name"
+            />
           </div>
           <div class="chats-text">
-            <h4>Vergil</h4>
-            <p>Ultimo accesso oggi alle 16:26</p>
+            <h4>{{contacts[activeContact].name}}</h4>
+            <p>
+              Ultimo accesso {{ getLastMessageDate(contacts[activeContact]) }}
+            </p>
           </div>
           <div class="icons">
             <i class="fas fa-magnifying-glass"></i>

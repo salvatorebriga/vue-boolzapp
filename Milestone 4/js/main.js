@@ -167,9 +167,28 @@ createApp({
         },
       ],
 
-      activeContact: null,
+      activeContact: 0,
       newMessage: "",
+      searchQuery: "",
     };
+  },
+
+  /*mounted() {
+    getLastMessage();
+  },*/
+
+  computed: {
+    filteredChats() {
+      return this.contacts.map((contact) => {
+        if (
+          contact.name.toLowerCase().includes(this.searchQuery.toLowerCase())
+        ) {
+          return { ...contact, visible: true };
+        } else {
+          return { ...contact, visible: false };
+        }
+      });
+    },
   },
   methods: {
     selectContact(index) {
@@ -194,6 +213,13 @@ createApp({
           status: "received",
         });
       }, 1000);
+    },
+
+    getLastMessageDate(contact) {
+      const messages = contact.messages;
+      return messages.length
+        ? messages[messages.length - 1].date
+        : "Nessuna data";
     },
   },
 }).mount("#app");

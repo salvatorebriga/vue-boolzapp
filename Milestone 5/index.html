@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/7711c3f1fc.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>WhatsApp</title>
+  </head>
+  <body>
+    <div id="app">
+      <div class="sidebar">
+        <header>
+          <div>
+            <img src="img/avatar_io.jpg" class="avatar" alt="" />
+          </div>
+          <div class="icons">
+            <i class="fas fa-circle-notch"></i>
+            <i class="fas fa-message"></i>
+            <i class="fas fa-ellipsis-vertical"></i>
+          </div>
+        </header>
+        <div class="notification">
+          <div class="bell">
+            <img src="img/bell-slash-solid.svg" alt="" />
+          </div>
+          <div class="text-notification">
+            <h5>Ricevi notifiche di nuovi messaggi</h5>
+            <a href="">Attiva notifiche Desktop</a>
+          </div>
+        </div>
+        <div class="search">
+          <div class="search-bar">
+            <div>
+              <span class="fas fa-magnifying-glass"></span>
+            </div>
+            <input
+              type="text"
+              v-model="searchQuery"
+              placeholder="Cerca o inizia una nuova chat"
+            />
+          </div>
+        </div>
+        <div class="chats">
+          <ul>
+            <li
+              v-for="(contact, index) in filteredChats"
+              @click="selectContact(index)"
+              v-show="contact.visible"
+            >
+              <div class="chats-row">
+                <div class="chats-pic">
+                  <img
+                    :src="contact.avatar"
+                    class="avatar"
+                    :alt="contact.avatar"
+                  />
+                </div>
+                <div class="chats-text">
+                  <h4>{{contact.name}}</h4>
+                  <p>
+                    {{contact.messages[contact.messages.length - 1].message}}
+                  </p>
+                </div>
+                <div class="chats-date">
+                  <p>{{contact.messages[contact.messages.length - 1].date}}</p>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="content">
+        <header>
+          <div>
+            <img
+              :src="contacts[activeContact].avatar"
+              class="avatar"
+              :alt="contacts[activeContact].name"
+            />
+          </div>
+          <div class="chats-text">
+            <h4>{{contacts[activeContact].name}}</h4>
+            <p>
+              Ultimo accesso {{ getLastMessageDate(contacts[activeContact]) }}
+            </p>
+          </div>
+          <div class="icons">
+            <i class="fas fa-magnifying-glass"></i>
+            <i class="fas fa-paperclip"></i>
+            <i class="fas fa-ellipsis-vertical"></i>
+          </div>
+        </header>
+        <div class="conversation">
+          <div
+            v-if="activeContact !== null"
+            class="message"
+            v-for="(contact, index) in contacts[activeContact].messages"
+            :key="index"
+            :class="contact.status"
+          >
+            <div class="text">
+              <p>{{contact.message}}</p>
+            </div>
+            <div class="arrow">
+              <i class="fas fa-angle-down"></i>
+            </div>
+          </div>
+        </div>
+        <div class="input-area">
+          <div class="col10">
+            <i class="fa-regular fa-face-smile"></i>
+          </div>
+          <div class="col80">
+            <input
+              type="text"
+              v-model="newMessage"
+              @keyup.enter="sendMessage"
+              placeholder="Scrivi un messaggio"
+            />
+          </div>
+          <div class="col10">
+            <i class="fas fa-microphone"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>

@@ -111,8 +111,13 @@
             <div class="text">
               <p>{{contact.message}}</p>
             </div>
-            <div class="arrow">
+            <div class="arrow" @click="toggleMenu(contact)">
               <i class="fas fa-angle-down"></i>
+            </div>
+
+            <div :class="['menu', { show: contact.isMenuVisible }]">
+              <a>Delete message</a>
+              <a>Info message</a>
             </div>
           </div>
         </div>
